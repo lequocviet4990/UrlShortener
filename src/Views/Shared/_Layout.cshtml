@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - url.idev.asia | Free Custom URL Shortener, Branded URLs, Link Management, API</title>
+    <meta name="description" content="Free custom URL Shortener, Shorten and replace long URL to short link. Track your links. Use it to affiliate ads, social websites, emails, text messages, flyers with QR code.">
+    <meta name="Keywords" content="url shortener, link management platform, bitly, tinyurl, api, branded urls, branded domian, links shortener, tiny url, short url, short link, links shortening">
+    <meta property="og:url" content="https://url.idev.asia">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="url.idev.asia | Free Custom URL Shortener, Branded URLs, Link Management, API">
+    <meta property="og:description" content="Free custom URL Shortener, Shorten and replace long URL to short link. Track your links. Use it to affiliate ads, social websites, emails, text messages, flyers with QR code.">
+    <meta property="og:image" content="https://url.idev.asia/img/shorts.png">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <meta name="robots" content="index,follow,all">
+    <link rel="icon" type="image/png" href="img/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon_io/apple-touch-icon.png">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />    
+    <link href="~/css/site.min.css" rel="stylesheet"  asp-append-version="true" />
+</head>
+<body>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Shortener - <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
+    
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

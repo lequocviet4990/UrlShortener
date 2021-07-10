@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        <a  href="/" title="URL Shortener">
+            URL Shortener
+        </a>
+    
+    
+    </h1>
+    <p>A URL shortener built with powerful tools to help you grow and protect your brand.</p>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Redirect))
+    {
+
+        <div class="row justify-content-center align-items-center h-100">
+            <div>
+                Please waiting ...
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="loader" id="loader"></div> 
+        </div>
+
+        <div class="row justify-content-center align-items-center h-100">
+
+
+            <input type="hidden" value="@ViewBag.Redirect" id="urlRedirect" />
+            <div id="countdown"></div>
+
+            <button type="button" onclick="ClickToPage()" class="btn btn-success d-none" id="Go">Click to Go</button>
+
+        </div>
+
+        <div class="row">
+            @await Html.PartialAsync("_ADS") 
+        </div>
+
+        <script>
+
+            var timeleft = 15;
+            var downloadTimer = setInterval(function () {
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    document.getElementById("countdown").innerHTML = "";
+                    document.getElementById("Go").classList.remove("d-none");
+                    document.getElementById("countdown").classList.add("d-none");
+                    document.getElementById("loader").classList.add("d-none");
+
+                } else {
+                    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+                }
+                timeleft -= 1;
+            }, 1000);
+
+            //dem nguoc va redirect
+            function Redirect(link) {
+                window.location.href = link;
+            }
+
+            function ClickToPage() {
+                var urlToRedirect = document.getElementById("urlRedirect").value;
+                Redirect(urlToRedirect);
+            }
+
+        </script>
+    }
+    else
+    {
+
+        <div class="row justify-content-center align-items-center h-100">
+            <form enctype="application/x-www-form-urlencoded" method="POST" action="/shorten" class="form-inline">
+                <div class="form-group">
+                    <label for="url">URL to shorten:</label>
+                    <input type="url" class="form-control" name="url">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Shorten</button>
+            </form>
+        </div>
+
+        <br />
+        <div class="row justify-content-center align-items-center h-100 form-inline">
+
+            @if (!string.IsNullOrEmpty(ViewBag.URLSHORTEN))
+            {
+
+                <div class="form-group">
+                    <label for="URLSHORTEN">Your link:</label>
+                    <input type="text" class="form-control" id="URLSHORTEN" name="URLSHORTEN" value="@ViewBag.URLSHORTEN">
+                </div>
+                <button type="button" onclick="Copy()" class="btn btn-success">Copy</button>
+                @section Scripts
+                        {
+                    <script>
+                        function Copy() {
+                            var copyText = document.getElementById("URLSHORTEN");
+                            copyText.select();
+                            copyText.setSelectionRange(0, 99999)
+                            document.execCommand("copy");
+                            toastr["success"]("Link is copied to clipboard");
+
+                        }
+                    </script>
+
+                }
+
+            }
+        </div>
+
+        <div class="row">
+            @await Html.PartialAsync("_ADS")
+        </div>
+
+    }
+</div>
